@@ -2,13 +2,13 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import HttpResponseRedirect, redirect, get_object_or_404
 from account.forms import UserLoginForm, UserRegisterForm, ProfileForm
 from django.urls import reverse, reverse_lazy
-from account.forms import ChangePasswordForm
+from account.forms import UserPasswordChangeForm
 from django.contrib.messages.views import SuccessMessageMixin
 from common.views import TitleMixin
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 from account.models import User, EmailVerification
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -55,7 +55,8 @@ def del_profile_image(request, user_id):
     return redirect('homeapp:homeapp')
 
 
-class ChangePasswordView(TitleMixin, SuccessMessageMixin, ChangePasswordForm):
+class UserPasswordChange(TitleMixin, SuccessMessageMixin, PasswordChangeView):
+    form_class = UserPasswordChangeForm
     template_name = 'account/changepassword.html'
     success_message = 'Успешно изменили пароль'
     success_url = reverse_lazy('homeapp:homeapp')

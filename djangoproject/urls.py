@@ -24,6 +24,9 @@ urlpatterns = [
     path('account/', include('account.urls', namespace='account')),
 ]
 
+admin.site.site_header = 'Панель управления сайтом'
+admin.site.index_title = 'Стартер для Django проектов'
+
 if settings.DEBUG:
     # import mimetypes
     # mimetypes.add_type("application/javascript", ".js", True)

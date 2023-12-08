@@ -2,12 +2,6 @@
   <div class="container">
     {% if user.is_authenticated %}
       <h1 class="mb-3">Приветствую {{ user.username }}</h1>
-      <div class="logout_button">
-      <form action="{% url 'account:logoutform' %}" method="post">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-warning text-center" style="width:180px;">Выход</button>
-      </form>
-      </div>
       {% else %}
     <h1 class="text-center">Стартер для Django проектов</h1>
     {% endif %}

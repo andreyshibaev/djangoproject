@@ -1,14 +1,11 @@
 import uuid
 from datetime import timedelta
-
 from django.contrib.auth import get_user_model
 from django.utils.timezone import now
 
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm, PasswordChangeForm
 from django import forms
-from account.models import User, EmailVerification
-
-from django.contrib.auth.views import PasswordChangeView
+from account.models import EmailVerification
 from django.core.exceptions import ValidationError
 
 
@@ -66,48 +63,35 @@ class UserRegisterForm(UserCreationForm):
 class ProfileForm(UserChangeForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control',
-        'placeholder': 'Username',
+        'placeholder': 'Пользователь',
         'required': False
     }))
     last_name = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control',
-        'placeholder': 'Surname',
+        'placeholder': 'Фамилия',
         'required': False
     }))
     username = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control',
-        'placeholder': 'Your login',
-        # 'readonly': True
+        'placeholder': 'Логин',
     }))
     email = forms.CharField(widget=forms.EmailInput(attrs={
         'class': 'form-control',
-        'placeholder': 'Your email',
-        # 'readonly': True
+        'placeholder': 'Почта',
     }))
     image = forms.ImageField(widget=forms.FileInput(attrs={
         'class': 'form-control',
-        'placeholder': 'Your photo',
+        'placeholder': 'Фото',
         'required': False,
     }))
 
     class Meta:
-        model = User
+        model = get_user_model()
         fields = ('username', 'first_name', 'last_name', 'email', 'image',)
 
 
-class ChangePasswordForm(PasswordChangeView):
-    # old_password = forms.CharField(widget=forms.PasswordInput(attrs={
-    #     'class': 'form-control',
-    #     'placeholder': 'Old password'
-    # }))
-    # new_password1 = forms.CharField(widget=forms.PasswordInput(attrs={
-    #     'class': 'form-control',
-    #     'placeholder': 'New password'
-    # }))
-    # new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={
-    #     'class': 'form-control',
-    #     'placeholder': 'Confirm password'
-    # }))
-    class Meta:
-        model = User
-        fields = ('old_password', 'new_password1', 'new_password2',)
+class UserPasswordChangeForm(PasswordChangeForm):
+    old_password = forms.CharField(label="Старый пароль", widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    new_password1 = forms.CharField(label="Новый пароль", widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    new_password2 = forms.CharField(label="Подтверждение пароля",
+                                    widget=forms.PasswordInput(attrs={'class': 'form-control'}))

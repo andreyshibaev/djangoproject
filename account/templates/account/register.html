@@ -7,8 +7,8 @@
 {% block body %}
     {% if user.is_authenticated %}
         <div class="container text-center">
-            <h1>Hello {{ user.username }}</h1>
-            <h2>You are already registered</h2>
+            <h1>Приветствую {{ user.username }}</h1>
+            <h2>Вы уже зарегистрированы</h2>
         </div>
 
     {% else %}
@@ -23,7 +23,7 @@
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ next }}">
                 <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">
+                    <legend class="mb-4">
                         <h1>Регистрация</h1>
                     </legend>
                 </fieldset>
