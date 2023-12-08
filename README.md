@@ -1,0 +1,16 @@
+Django boilerplate
+-
+- Windows 11
+- git clone https://github.com/andreyshibaev/djangoproject.git
+- cd djangoproject
+- python -m venv venv
+- venv\Scripts\activate.bat
+- pip install -r requirements.txt
+- create .env in the root folder
+- in .env add constant: DEBUG = True and SECRET_KEY = ' '
+- in terminal add command ---> python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+- paste the generated key in file.env in constant SECRET_KEY = 'generated key'
+- npm install
+- py manage.py migrate
+- py manage.py createsuperuser
+- py manage.py runserver

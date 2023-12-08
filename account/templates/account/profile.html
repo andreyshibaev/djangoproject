@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+{% block body %}
+{#    {% if user.is_verified_email == False %}#}
+{#     <div class="container py-5">#}
+{#     <h1>Вы не подтвердили почту!</h1>#}
+{#     <p class="alert alert-warning">Информация недоступна!</p>#}
+{#     </div>#}
+{#    {% else %}#}
+    <div class="container py-3">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-info alert-dismissible fade show">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <h1 class="text-center mt-4">Приветствую {{ user.username }}</h1>
+        <div class="content py-4">
+            {% if user.is_superuser %}
+                <h2 class="alert alert-success text-center">У вас есть права админа</h2>
+            {% else %}
+                <h2 class="alert alert-warning text-center">Нет прав админа</h2>
+            {% endif %}
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <h3 class="mb-3">Информация</h3>
+                <div id="user_photo">
+                    {% if user.image %}
+                        <img src="{{ user.image.url }}" class="py-3" alt="image" width="250">
+                        <form action="{% url 'account:delphotouser' user.pk %}" method="POST" class="mb-5">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger mt-3">Удалить фото</button>
+                        </form>
+                    {% else %}
+                        <div class="alert alert-info">нет фото</div>
+                    {% endif %}
+                </div>
+                <div class="list-group">
+                    <h4 class="mb-4">Логин: {{ user.username }}</h4>
+                    <h4 class="mb-4">id №: {{ user.pk }}</h4>
+                    <h4 class="mb-4">Имя: {{ user.first_name }}</h4>
+                    <h4 class="mb-4">Фамилия: {{ user.last_name }}</h4>
+                    <h4 class="mb-4">Почта: {{ user.email }}</h4>
+                </div>
+
+                <a class="btn btn-success" href="{% url 'account:changepassword' %}">Изменить пароль</a>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <h3 class="mb-3">Редактировать данные</h3>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <div class="form-floating mb-3">
+                            {{ form.username }}
+                            <label for="{{ form.username.id_for_label }}">Логин</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            {{ form.email }}
+                            <label for="{{ form.email.id_for_label }}">Почта</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            {{ form.first_name }}
+                            <label for="{{ form.first_name.id_for_label }}">Имя</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            {{ form.last_name }}
+                            <label for="{{ form.last_name.id_for_label }}">Фамилия</label>
+                        </div>
+                        <p>Фото</p>
+                        <div class="thumb_photo_user">
+                            {% if user.image %}
+                                <img src="{{ user.image.url }}" class="rounded mb-4" alt="image_user" width="120">
+                            {% else %}
+                                <div class="alert alert-info">нет фото</div>
+                            {% endif %}
+                        </div>
+                        <p>Добавить новое фото</p>
+                        <div class="form-floating mb-3">
+                            {{ form.image }}
+                            <label for="{{ form.image.id_for_label }}">Фото</label>
+                        </div>
+                    </fieldset>
+                    <button type="submit" class="btn btn-success mt-3">Обновить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{#    {% endif %}#}
+{% endblock body %}

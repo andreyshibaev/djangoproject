@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   {{ title }}
+{% endblock title %}
+
+{% block body %}
+    {% if user.is_authenticated %}
+        <div class="container text-center">
+            <h1>Hello {{ user.username }}</h1>
+            <h2>You are already logged in</h2>
+        </div>
+
+    {% else %}
+        <div class="container">
+            {% if messages or form.non_field_errors %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-dismissible fade show mt-4 {% if messages %} alert-success{% else %} alert-warning{% endif %}
+             " role="alert">{{ message }}
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                        <div class="alert alert-dismissible fade show mt-4 {% if messages %} alert-success{% else %} alert-warning {% endif %}
+             " role="alert">{{ form.non_field_errors }}
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
+                {% endif %}
+            {% endif %}
+
+            <form method="post" class="py-5" action="{% url 'account:loginform' %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">
+                        <h1>Войти в аккаунт</h1>
+                    </legend>
+                    <div class="form-floating mb-3">
+                        {{ form.username }}
+                        <label for="{{ form.username.id_for_label }}">Логин</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{ form.password }}
+                        <label for="{{ form.password.id_for_label }}">Пароль</label>
+                    </div>
+                </fieldset>
+                <button type="submit" class="btn btn-success">Войти</button>
+            </form>
+            <div class="border-top pt-3 mb-3">
+                <small class="text-muted">
+                    Нет аккаунта? <a class="ml-2" href="{% url 'account:registerform' %}">Регистрация</a>
+                </small>
+            </div>
+        </div>
+    {% endif %}
+{% endblock body %}

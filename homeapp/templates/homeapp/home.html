@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% if messages or form.non_field_errors %}
+            {% if messages %}
+                {% for message in messages %}
+
+                    <div class="alert alert-dismissible fade show mt-4 {% if messages %} alert-success{% else %} alert-warning{% endif %}
+             " role="alert">{{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-dismissible fade show mt-4 {% if messages %} alert-success{% else %} alert-warning {% endif %}
+             " role="alert">{{ form.non_field_errors }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+            {% endif %}
+        {% endif %}
+        <h1 class="py-5">{{ title }}</h1>
+    </div>
+{% endblock body %}

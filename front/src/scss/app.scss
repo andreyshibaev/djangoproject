@@ -1,0 +1,9 @@
+body{
+  background: #fff4eb;
+  h1{
+    color: #0a2d47;
+  }
+}
+@import './partials/header.scss';
+@import './partials/footer.scss';
+@import './partials/menu';
