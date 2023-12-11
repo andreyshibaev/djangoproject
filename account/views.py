@@ -13,13 +13,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 
-class LoginUserView(TitleMixin, SuccessMessageMixin, LoginView):
+class LoginUserView(TitleMixin, LoginView):
     template_name = 'account/login.html'
     form_class = UserLoginForm
-    success_message = 'Вы успешно вошли!'
     title = 'Войти в кабинет'
 
     def get_success_url(self):
+        messages.success(self.request, 'Вы успешно вошли в аккаунт!')
         return reverse_lazy('homeapp:homeapp')
 
 
