@@ -59,7 +59,7 @@ class UserPasswordChange(TitleMixin, SuccessMessageMixin, PasswordChangeView):
     form_class = UserPasswordChangeForm
     template_name = 'account/changepassword.html'
     success_message = 'Успешно изменили пароль'
-    success_url = reverse_lazy('homeapp:homeapp')
+    success_url = reverse_lazy('account:profileform')
     title = 'Изменить пароль'
 
 
