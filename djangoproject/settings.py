@@ -121,7 +121,6 @@ DATABASES = {
 # }
 
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -180,8 +179,9 @@ INTERNAL_IPS = [
     '127.0.0.1',
     'localhost',
 ]
-DEFAULT_FROM_EMAIL = 'namer@email.ru'
-ADMINS = [('nameadmin', 'namer@email.ru'),]
+DEFAULT_FROM_EMAIL = env('EMAIL_HOST_USER')
+SERVER_EMAIL = env('EMAIL_HOST_USER')
+ADMINS = [('nameadmin', 'namer@email.ru'), ]
 
 # users
 AUTH_USER_MODEL = 'account.User'
