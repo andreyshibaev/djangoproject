@@ -181,7 +181,7 @@ INTERNAL_IPS = [
 ]
 DEFAULT_FROM_EMAIL = env('EMAIL_HOST_USER')
 SERVER_EMAIL = env('EMAIL_HOST_USER')
-ADMINS = [('nameadmin', 'namer@email.ru'), ]
+ADMINS = [('nameadmin', 'yourmail@mail.ru'), ]
 
 # users
 AUTH_USER_MODEL = 'account.User'
