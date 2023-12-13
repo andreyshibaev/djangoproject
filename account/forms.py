@@ -1,11 +1,7 @@
-import uuid
-from datetime import timedelta
 from django.contrib.auth import get_user_model
-from django.utils.timezone import now
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm, PasswordChangeForm
 from django import forms
-from account.models import EmailVerification
 from django.core.exceptions import ValidationError
 
 
@@ -51,13 +47,6 @@ class UserRegisterForm(UserCreationForm):
         if get_user_model().objects.filter(email=email).exists():
             raise ValidationError("Пользователь с такой почтой уже есть!")
         return email
-
-    def save(self, commit=True):
-        user = super(UserRegisterForm, self).save(commit=True)
-        expiration = now() + timedelta(hours=48)
-        record = EmailVerification.objects.create(code=uuid.uuid4(), user=user, expiration=expiration)
-        record.send_verification_email()
-        return user
 
 
 class ProfileForm(UserChangeForm):

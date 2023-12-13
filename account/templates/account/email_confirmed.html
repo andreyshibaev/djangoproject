@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="container py-5">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert fade show mt-4 {% if messages %}alert-info{% else %} alert-warning{% endif %}
+             " role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Электронная почта подтверждена</h4>
+            <p>Ваш адрес электронной почты успешно подтвержден. Спасибо за регистрацию!</p>
+        </div>
+    </div>
+{% endblock body %}

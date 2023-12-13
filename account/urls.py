@@ -12,7 +12,6 @@ urlpatterns = [
     path('profile/', login_required(views.ProfileUpdateView.as_view()), name='profileform'),
     path('profile/<int:user_id>/delete', views.del_profile_image, name='delphotouser'),
     path('logout/', LogoutView.as_view(), name='logoutform'),
-    path('verify/<str:email>/<uuid:code>/', views.EmailVerificationView.as_view(), name='emailverification'),
     path('changepassword/', views.UserPasswordChange.as_view(), name='changepassword'),
     path('password-reset/', PasswordResetView.as_view(
         template_name='account/password_reset_form.html',
@@ -30,4 +29,10 @@ urlpatterns = [
     path('password-reset/complete/', PasswordResetCompleteView.as_view(
         template_name='account/password_reset_complete.html'),
          name='password_reset_complete'),
+
+    path('email-confirmation-sent/', views.EmailConfirmationSentView.as_view(), name='email_confirmation_sent'),
+    path('confirm-email/<str:uidb64>/<str:token>/', views.UserConfirmEmailView.as_view(), name='confirm_email'),
+    path('email-confirmed/', views.EmailConfirmedView.as_view(), name='email_confirmed'),
+    path('confirm-email-failed/', views.EmailConfirmationFailedView.as_view(), name='email_confirmation_failed'),
+
 ]
