@@ -1,9 +1,14 @@
+from django.http import HttpResponseServerError
+from django.shortcuts import render
 
 
-class TitleMixin():
-    title = None
+def page_not_found(request, exception=None):
+    return render(request, '404.html', status=404)
 
-    def get_context_data(self, **kwargs):
-        context = super(TitleMixin, self).get_context_data(**kwargs)
-        context['title'] = self.title
-        return context
+
+def forbidden(request, exception=None):
+    return render(request, '403.html', status=403)
+
+
+def server_error(request):
+    return HttpResponseServerError('<h1>Ошибка сервера!</h1>', status=500)
