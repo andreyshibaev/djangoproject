@@ -86,6 +86,7 @@ class UserPasswordChange(DataMixin, SuccessMessageMixin, PasswordChangeView):
     success_url = reverse_lazy('account:profileform')
     title_page = 'Форма для изменения пароля'
 
+
 class UserConfirmEmailView(View):
     def get(self, request, uidb64, token):
         try:
@@ -107,27 +108,12 @@ class EmailConfirmationSentView(DataMixin, TemplateView):
     template_name = 'account/email_confirmation_sent.html'
     title_page = 'Письмо активации отправлено'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['title'] = 'Письмо активации отправлено'
-    #     return context
-
 
 class EmailConfirmedView(DataMixin, TemplateView):
     template_name = 'account/email_confirmed.html'
     title_page = 'Ваш электронный адрес активирован'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['title'] = 'Ваш электронный адрес активирован'
-    #     return context
-
 
 class EmailConfirmationFailedView(DataMixin, TemplateView):
     template_name = 'account/email_confirmation_failed.html'
     title_page = 'Ошибка активации почты'
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['title'] = 'Ваш электронный адрес не активирован'
-    #     return context
