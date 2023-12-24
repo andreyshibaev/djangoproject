@@ -1,9 +1,23 @@
+@import 'partials/vars';
+@import 'partials/mixins';
 body{
   background: #fff4eb;
   h1{
     color: #0a2d47;
   }
 }
+@import '~bootstrap/scss/bootstrap';
 @import './partials/header.scss';
 @import './partials/footer.scss';
 @import './partials/menu';
+@import 'partials/login_page';
+@import 'partials/register_page';
+@import 'partials/password_reset_form';
+@import 'partials/password_reset_done';
+@import 'partials/password_reset_confirm';
+@import 'partials/password_reset_complete';
+@import 'partials/profile_page';
+@import 'partials/changepassword';
+@import 'partials/email_confirmation_sent';
+@import 'partials/email_confirmed';
+@import 'partials/email_confirmation_failed';

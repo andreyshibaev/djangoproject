@@ -1,0 +1,34 @@
+#register_page {
+  padding: $page_container;
+  margin: 100px 0;
+
+  .block_register_form {
+    max-width: 550px;
+    margin: 0 auto;
+
+    form {
+      margin-bottom: 30px;
+
+      legend {
+        margin-bottom: 30px;
+      }
+    }
+
+    a {
+      color: #000000;
+
+      &:hover {
+        transition: all .5s;
+        color: #0a2d47;
+      }
+    }
+
+    .btn_register_user {
+      background: #0a485b;
+      border: none;
+      color: #fff;
+      padding: 10px 30px;
+      border-radius: 5px;
+    }
+  }
+}

@@ -6,13 +6,11 @@ from django.core.exceptions import ValidationError
 
 
 class UserLoginForm(AuthenticationForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Your name'
+    username = forms.CharField(label='Пользователь', widget=forms.TextInput(attrs={
+        'class': 'form-control'
     }))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Your password'
+    password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={
+        'class': 'form-control'
     }))
 
     class Meta:
@@ -21,21 +19,17 @@ class UserLoginForm(AuthenticationForm):
 
 
 class UserRegisterForm(UserCreationForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Your login'
+    username = forms.CharField(label='Имя', widget=forms.TextInput(attrs={
+        'class': 'form-control'
     }))
-    email = forms.EmailField(widget=forms.EmailInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Your email'
+    email = forms.EmailField(label='Почта', widget=forms.EmailInput(attrs={
+        'class': 'form-control'
     }))
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Your password'
+    password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={
+        'class': 'form-control'
     }))
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Confirm password'
+    password2 = forms.CharField(label='Подтвердить пароль', widget=forms.PasswordInput(attrs={
+        'class': 'form-control'
     }))
 
     class Meta:

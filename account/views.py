@@ -5,7 +5,9 @@ from account.forms import UserLoginForm, UserRegisterForm, ProfileForm
 from django.urls import reverse_lazy
 from account.forms import UserPasswordChangeForm
 from django.contrib.messages.views import SuccessMessageMixin
-from account.services.mixins import UserIsNotAuthenticated, DataMixin
+
+from account.services.auth_redirect import UserIsNotAuthenticated
+from account.services.mixins import DataMixin
 from django.views.generic.base import TemplateView, View
 from django.views.generic.edit import CreateView, UpdateView
 from account.models import User
@@ -24,8 +26,12 @@ class LoginUserView(DataMixin, UserIsNotAuthenticated, LoginView):
     form_class = UserLoginForm
     title_page = 'Войти в аккаунт'
 
+    def form_invalid(self, form):
+        messages.error(self.request, 'Неверное имя или пароль', extra_tags='danger')
+        return self.render_to_response(self.get_context_data(form=form))
+
     def get_success_url(self):
-        messages.success(self.request, 'Вы успешно вошли в аккаунт!')
+        messages.success(self.request, 'Вы успешно вошли в аккаунт!', extra_tags='success')
         return reverse_lazy('homeapp:homeapp')
 
 
@@ -76,7 +82,7 @@ def del_profile_image(request, user_id):
     if request.method == 'POST':
         profile_image.delete()
         messages.success(request, 'Фото пользователя удалено!')
-    return redirect('homeapp:homeapp')
+    return redirect('account:profileform')
 
 
 class UserPasswordChange(DataMixin, SuccessMessageMixin, PasswordChangeView):

@@ -1,55 +1,41 @@
 {% extends 'base.html' %}
 
 {% block title %}
- {{ title }}
+    {{ title }}
 {% endblock title %}
 
 {% block body %}
-    {% if user.is_authenticated %}
-        <div class="container text-center">
-            <h1>Приветствую {{ user.username }}</h1>
-            <h2>Вы уже зарегистрированы</h2>
-        </div>
-
-    {% else %}
-        <div class="container">
-            {% if form.errors %}
-                <div class="alert alert-danger alert-dismissible fade show mt-4">{{ form.errors }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            {% endif %}
-
-            <form method="post" class="py-5" action="{% url 'account:registerform' %}">
+    <section id="register_page">
+        <div class="block_register_form">
+            <form method="post" action="{% url 'account:registerform' %}">
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ next }}">
-                <fieldset class="form-group">
-                    <legend class="mb-4">
-                        <h1>Регистрация</h1>
-                    </legend>
+                <fieldset>
+                    <legend>Регистрация</legend>
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-info base_errors">
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% else %}
+                    {% endif %}
+                    {% for f in form %}
+                        <div class="form-floating mb-3">
+                            {{ f }}
+                            <label for="{{ f.id_for_label }}">{{ f.label }}</label>
+                        </div>
+                        {% if f.errors %}
+                            <div class="alert alert-danger field_error">
+                                {{ f.errors }}
+                            </div>
+                        {% else %}
+                        {% endif %}
+                    {% endfor %}
                 </fieldset>
-                <div class="form-floating mb-3">
-                    {{ form.username }}
-                    <label for="{{ form.username.id_for_label }}">Имя пользователя</label>
-                </div>
-                <div class="form-floating mb-3">
-                    {{ form.email }}
-                    <label for="{{ form.email.id_for_label }}">Почта</label>
-                </div>
-                <div class="form-floating mb-3">
-                    {{ form.password1 }}
-                    <label for="{{ form.password1.id_for_label }}">Пароль</label>
-                </div>
-                <div class="form-floating mb-3">
-                    {{ form.password2 }}
-                    <label for="{{ form.password2.id_for_label }}">Подтвердить пароль</label>
-                </div>
-                <button type="submit" class="btn btn-success mt-3">Зарегистрировать</button>
+                <button type="submit" class="btn_register_user">Зарегистрировать</button>
             </form>
-            <div class="border-top pt-3 mb-3">
-                <small class="text-muted">
-                   Уже зарегистрированы? <a class="ml-2" href="{% url 'account:loginform' %}">Войти</a>
-                </small>
+            <div class="btn_login_auth">
+                Уже зарегистрированы? <a class="ml-2" href="{% url 'account:loginform' %}">Войти</a>
             </div>
         </div>
-    {% endif %}
+    </section>
 {% endblock body %}

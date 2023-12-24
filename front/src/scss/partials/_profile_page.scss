@@ -1,0 +1,40 @@
+#profile_page {
+  padding: $page_container;
+
+  .wrapper_for_profile_page {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    margin: 30px 0;
+    @include breakpoint($xlbp) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @include breakpoint($largebp) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @include breakpoint($desktopbp) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @include breakpoint($tabletbp) {
+      grid-template-columns: 1fr;
+    }
+
+    .btn_change_password_in_profile {
+      background: #0a485b;
+      border: none;
+      color: #fff;
+      padding: 10px 30px;
+      border-radius: 5px;
+      margin-top: 30px;
+      text-decoration: none;
+
+      &:hover {
+        transition: all 0.5s;
+        background: #032b38;;
+      }
+    }
+    .btn_update_profile_form{
+      @extend .btn_change_password_in_profile
+    }
+  }
+}

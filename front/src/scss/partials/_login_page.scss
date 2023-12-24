@@ -1,0 +1,48 @@
+#login_page {
+  padding: $page_container;
+  margin: 100px 0;
+
+  .block_login_form {
+    max-width: 550px;
+    margin: 0 auto;
+
+    form {
+      margin-bottom: 30px;
+
+      legend {
+        margin-bottom: 30px;
+      }
+    }
+
+    a {
+      color: #000000;
+
+      &:hover {
+        transition: all .5s;
+        color: #0a2d47;
+      }
+    }
+
+    .restore_btn {
+      margin-bottom: 20px;
+    }
+
+    .register_btn {
+      @extend .restore_btn
+    }
+  }
+
+  .btn_login_auth {
+    background: #0a485b;
+    border: none;
+    color: #fff;
+    padding: 10px 30px;
+    border-radius: 5px;
+
+    &:hover {
+      transition: all .5s;
+      background: #0a2d47;
+      color: #0edcde;
+    }
+  }
+}

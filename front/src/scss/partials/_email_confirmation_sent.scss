@@ -1,0 +1,17 @@
+#email_confirmation_sent {
+  padding: $page_container;
+  margin: 100px 0;
+  .block_message_for_confirmation_sent{
+    margin: 30px 0;
+  }
+  .home_page_link{
+    a{
+      color: #000;
+      &:hover{
+        transition: all 0.5s;
+        color: #e23d0e;
+        text-decoration: none;
+      }
+    }
+  }
+}

@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block title %}
-	{{ title }}
+    {{ title }}
 {% endblock %}
 
 {% block body %}
-    <div class="container py-5">
+    <section id="email_confirmed">
         {% if messages %}
             {% for message in messages %}
                 <div class="alert fade show mt-4 {% if messages %}alert-info{% else %} alert-warning{% endif %}
@@ -14,9 +14,10 @@
                 </div>
             {% endfor %}
         {% endif %}
-        <div class="alert alert-success" role="alert">
-            <h4 class="alert-heading">Электронная почта подтверждена</h4>
-            <p>Ваш адрес электронной почты успешно подтвержден. Спасибо за регистрацию!</p>
+        <div class="alert alert-success block_email_confirmed" role="alert">
+            <h1 class="alert-heading">Электронная почта подтверждена</h1>
+            <p>Ваш адрес электронной почты успешно подтвержден.</p>
+            <p>Спасибо за регистрацию!</p>
         </div>
-    </div>
+    </section>
 {% endblock body %}
