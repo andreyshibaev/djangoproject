@@ -5,14 +5,14 @@
 {% endblock title %}
 {% block body %}
     <section id="profile_page">
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-info alert-dismissible fade show">
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            {% endfor %}
-        {% endif %}
+        {% for message in messages %}
+            <div class="alert alert-dismissible fade show mt-4 alert-{{ message.tags }}" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                        aria-label="Close">
+                </button>
+            </div>
+        {% endfor %}
         <h1 class="text-center">Приветствую {{ user.username }}</h1>
         {% if user.is_superuser %}
             <h2 class="alert alert-success text-center mt-3">У вас есть права админа</h2>

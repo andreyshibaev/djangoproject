@@ -145,7 +145,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'ru-Ru'
 
 TIME_ZONE = 'Asia/Novosibirsk'
 
@@ -190,3 +190,6 @@ AUTH_USER_MODEL = 'account.User'
 LOGIN_URL = 'account:loginform'
 LOGIN_REDIRECT_URL = 'homeapp:homeapp'
 LOGOUT_REDIRECT_URL = 'homeapp:homeapp'
+AUTHENTICATION_BACKENDS = [
+    'account.services.backends.UserModelBackend'
+]

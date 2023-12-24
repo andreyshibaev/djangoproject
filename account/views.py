@@ -81,7 +81,7 @@ def del_profile_image(request, user_id):
     profile_image = profile_user.image
     if request.method == 'POST':
         profile_image.delete()
-        messages.success(request, 'Фото пользователя удалено!')
+        messages.success(request, 'Фото пользователя удалено!', extra_tags='info')
     return redirect('account:profileform')
 
 
